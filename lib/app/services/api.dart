@@ -1,18 +1,20 @@
 import 'package:coronavirus_rest_api_flutter_course/app/services/api_keys.dart';
 import 'package:flutter/foundation.dart';
-enum Endpoints{
+
+enum Endpoints {
   cases,
   todayCases,
   active,
   deaths,
-  todayDeaths,
   recovered,
+  todayDeaths,
   critical,
   casesPerOneMillion,
   deathsPerOneMillion,
 }
-class API{
-  API({@required this.apiKey}); 
+
+class API {
+  API({@required this.apiKey});
   final String apiKey;
 
   factory API.sandbox() => API(apiKey: APIKeys.ncovSandboxKey);
@@ -22,29 +24,28 @@ class API{
   static final String basePath = 't/nubentos.com/ncovapi/2.0.0';
 
   Uri tokenUri() => Uri(
-    scheme: 'https',
-    host: host,
-    port: port,
-    path: 'token',
-    queryParameters: {'grant_type':'client_credentials'},
-  );
+        scheme: 'https',
+        host: host,
+        port: port,
+        path: 'token',
+        queryParameters: {'grant_type': 'client_credentials'},
+      );
 
-  Uri endpointUri(Endpoints endpoints) => Uri (
-    scheme: 'https',
-    host: host,
-    port: port,
-    path: '$basePath/${_paths[endpoints]}'
-  );
+  Uri endpointUri(Endpoints endpoints) => Uri(
+      scheme: 'https',
+      host: host,
+      port: port,
+      path: '$basePath/${_paths[endpoints]}');
 
-  static Map<Endpoints,String> _paths = {
-    Endpoints.cases : 'cases',
+  static Map<Endpoints, String> _paths = {
+    Endpoints.cases: 'cases',
     Endpoints.todayCases: 'todayCases',
     Endpoints.active: 'active',
     Endpoints.critical: 'critical',
     Endpoints.deaths: 'deaths',
-    Endpoints.todayDeaths :'todayDeaths',
     Endpoints.recovered: 'recovered',
-    Endpoints.casesPerOneMillion:'casesPerOneMillion',
-    Endpoints.deathsPerOneMillion: 'deatsPerOneMillion',
+    Endpoints.todayDeaths: 'todayDeaths',
+    Endpoints.casesPerOneMillion: 'casesPerOneMillion',
+    Endpoints.deathsPerOneMillion: 'deathsPerOneMillion',
   };
 }
