@@ -30,7 +30,6 @@ class APIService {
   Future<EndpointData> getEndpointData(
       {@required String accessToken, @required Endpoints endpoint}) async {
     final uri = api.endpointUri(endpoint);
-    print(endpoint);
     final response = await http.get(
       uri.toString(),
       headers: {'Authorization': 'Bearer $accessToken'},
